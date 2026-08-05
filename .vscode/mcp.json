@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "theoremsearch-remote": {
+      "type": "http",
+      "url": "https://api.theoremsearch.com/mcp"
+    },
+    "theoremsearch-local": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-E", "${workspaceFolder}/server.py"]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+# ============================================================
+# 如何在 Codex 中接入 TheoremSearch
+# ============================================================
+# 用法：把这个文件（或其中任一段）放到你要使用的项目里，
+#       路径与 Rethlas 一致：<项目>/.codex/config.toml
+#
+# 方案 A：官方远程 MCP（零代码，只有 1 个 theorem_search 工具）
+# 方案 B：本仓库的本地包装器（多工具：搜索 + 过滤 + 依赖图）
+#
+# 注意：本地包装器需要先激活本项目 venv 中的 python，
+#       见 README「安装」一节。推荐在 venv 激活后运行 codex。
+
+[mcp_servers.theoremsearch_remote]
+# 方案 A —— 官方远程 MCP 服务器
+url = "https://api.theoremsearch.com/mcp"
+tool_timeout_sec = 120
+
+[mcp_servers.theoremsearch]
+# 方案 B —— 本地 MCP 包装器（本仓库 server.py）
+# -E 忽略 PYTHONPATH，避免本地包遮蔽 fastmcp 的 mcp SDK
+command = "python"
+args = ["-E", "./server.py"]
+cwd = "./"
+tool_timeout_sec = 120
