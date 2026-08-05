@@ -16,12 +16,24 @@
 
 ## 快速体验（不需要配 MCP）
 
-如果只是想先感受搜索结果质量，直接跑脚本（只需 `requests`）：
+如果只是想先感受搜索结果质量，直接跑脚本（只需 `requests`）。
+
+建议直接调用虚拟环境里的 Python 可执行文件（推荐），这样不依赖不同 shell 的激活命令。
+
+Windows（PowerShell/CMD）：
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python scripts\quick_test.py
+```
+
+macOS/Linux（bash/zsh）：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python scripts/quick_test.py
 ```
 
 它会依次演示：语义搜索、带过滤的搜索（来源/类型/年份）、全语料搜索（含 formal Lean）、论文补全、依赖图漫游。
@@ -94,10 +106,24 @@ tool_timeout_sec = 120
 
 ### 安装与启动
 
+Windows（PowerShell/CMD）：
+
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 ```
+
+macOS/Linux（bash/zsh）：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+虚拟环境路径差异：
+
+- Windows 的可执行文件在 `.venv\\Scripts\\` 下。
+- macOS/Linux 的可执行文件在 `.venv/bin/` 下。
 
 在激活 venv 后，把以下配置放进目标项目的 `.codex/config.toml`：
 
@@ -129,6 +155,10 @@ VS Code 则用 `.vscode/mcp.json`：
 
 ```powershell
 .venv\Scripts\python -E .\server.py
+```
+
+```bash
+.venv/bin/python -E ./server.py
 ```
 
 ---

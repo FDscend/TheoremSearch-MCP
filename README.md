@@ -16,12 +16,24 @@ This repository provides two integration paths:
 
 ## Quick Test (No MCP Setup Needed)
 
-If you just want to evaluate search quality first, run the script (only `requests` is required):
+If you just want to evaluate search quality first, run the script (only `requests` is required).
+
+Use the Python executable inside the virtual environment directly (recommended), so you do not need activation-specific shell commands.
+
+Windows (PowerShell/CMD):
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python scripts\quick_test.py
+```
+
+macOS/Linux (bash/zsh):
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python scripts/quick_test.py
 ```
 
 It demonstrates semantic search, filtered search (source/type/year), whole-corpus graph search (including formal Lean), paper autocomplete, and dependency graph traversal.
@@ -94,10 +106,24 @@ This wrapper provides 5 tools, adding graph capabilities beyond the official MCP
 
 ### Install and Run
 
+Windows (PowerShell/CMD):
+
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 ```
+
+macOS/Linux (bash/zsh):
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+Virtual environment path differences:
+
+- Windows executables are under `.venv\\Scripts\\`.
+- macOS/Linux executables are under `.venv/bin/`.
 
 After activating your virtual environment, add this to `.codex/config.toml` in the target project:
 
@@ -129,6 +155,10 @@ You can also manually run the server in stdio mode for validation:
 
 ```powershell
 .venv\Scripts\python -E .\server.py
+```
+
+```bash
+.venv/bin/python -E ./server.py
 ```
 
 ---
