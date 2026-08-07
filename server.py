@@ -196,7 +196,14 @@ def build_mcp_app() -> Optional[Any]:
 
     app = FastMCP("theoremsearch")
 
-    @app.tool(name="theorem_search")
+    @app.tool(
+        name="theorem_search",
+        description=(
+            "Semantic search for theorems across ~9.27M statements. "
+            "Backed by POST /search: Qwen3-Embedding-8B + HNSW ANN + exact-cosine "
+            "rerank, with optional citation weighting."
+        ),
+    )
     def _tool_theorem_search(
         query: str,
         n_results: int = 10,
@@ -228,7 +235,13 @@ def build_mcp_app() -> Optional[Any]:
             db_top_k=db_top_k,
         )
 
-    @app.tool(name="graph_search")
+    @app.tool(
+        name="graph_search",
+        description=(
+            "Semantic search over the full TheoremGraph corpus "
+            "(formal Lean + informal arXiv)."
+        ),
+    )
     def _tool_graph_search(
         query: str,
         n_results: int = 10,
@@ -236,7 +249,13 @@ def build_mcp_app() -> Optional[Any]:
     ) -> Dict[str, Any]:
         return graph_search(query=query, n_results=n_results, formality=formality)
 
-    @app.tool(name="graph_statement")
+    @app.tool(
+        name="graph_statement",
+        description=(
+            "Return a statement and its dependency neighborhood, walking the "
+            "direction src/dep/both with formality informal or formal."
+        ),
+    )
     def _tool_graph_statement(
         statement_id: str,
         direction: str = "both",
@@ -248,14 +267,23 @@ def build_mcp_app() -> Optional[Any]:
             formality=formality,
         )
 
-    @app.tool(name="graph_paper")
+    @app.tool(
+        name="graph_paper",
+        description=(
+            "Return all statements and dependency edges of a paper or Lean "
+            "repository, by arXiv ID / repo slug (external_id) or UUID (paper_id)."
+        ),
+    )
     def _tool_graph_paper(
         external_id: Optional[str] = None,
         paper_id: Optional[str] = None,
     ) -> Dict[str, Any]:
         return graph_paper(external_id=external_id, paper_id=paper_id)
 
-    @app.tool(name="paper_search")
+    @app.tool(
+        name="paper_search",
+        description="Autocomplete over paper titles and arXiv external IDs.",
+    )
     def _tool_paper_search(q: str, limit: int = 8) -> Dict[str, Any]:
         return paper_search(q=q, limit=limit)
 
